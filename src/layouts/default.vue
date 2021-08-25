@@ -1,6 +1,6 @@
 <template>
   <el-container style="height: 100%; border: 1px solid #eee">
-    <el-aside style="background-color: rgb(238, 241, 246)">
+    <el-aside style="background-color: rgb(238, 241, 246)" class="sidebar">
       <el-menu :default-openeds="['1', '3']">
         <el-submenu index="1">
           <template #title>
@@ -66,17 +66,20 @@
     color: #333;
   }
   .sidebar {
-    font-size: 15px;
-    background-color: #fff;
-    width: 20rem;
     position: fixed;
-    z-index: 10;
-    margin: 0;
-    top: 3.6rem;
-    left: 0;
-    bottom: 0;
-    box-sizing: border-box;
-    border-right: 1px solid #eaecef;
+    width: 250px;
+    height: 100%;
+    z-index: 999;
     overflow-y: auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: -webkit-transform .2s;
+    transition: -webkit-transform .2s;
+    transition: transform .2s;
+    transition: transform .2s,-webkit-transform .2s;
+    -webkit-box-shadow: 0 0 6px 0 rgb(0 0 0 / 16%);
+    box-shadow: 0 0 6px 0 rgb(0 0 0 / 16%);
 }
 </style>
