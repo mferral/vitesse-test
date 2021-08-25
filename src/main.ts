@@ -90,6 +90,10 @@ import {
   ElMessageBox,
   ElNotification,
 } from 'element-plus'
+// windicss layers
+// import 'virtual:windi-base.css'
+// import 'virtual:windi-components.css'
+import './styles/main.css'
 
 const components = [
   ElAlert,
@@ -178,10 +182,6 @@ const plugins = [
   ElMessageBox,
   ElNotification,
 ]
-// windicss layers
-// import 'virtual:windi-base.css'
-// import 'virtual:windi-components.css'
-// import './styles/main.css'
 // import 'virtual:windi-utilities.css'
 
 const routes = setupLayouts(generatedRoutes)
