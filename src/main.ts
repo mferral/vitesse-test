@@ -1,9 +1,9 @@
 // register vue composition api globally
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import routes from 'virtual:generated-pages'
+import { setupLayouts } from 'virtual:generated-layouts'
+import generatedRoutes from 'virtual:generated-pages'
 import App from './App.vue'
-
 import 'element-plus/dist/index.css'
 // eslint-disable-next-line import/order
 import {
@@ -184,11 +184,19 @@ const plugins = [
 // import './styles/main.css'
 // import 'virtual:windi-utilities.css'
 
+const routes = setupLayouts(generatedRoutes)
+
 const app = createApp(App)
 const router = createRouter({
   history: createWebHistory(),
   routes,
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.auth) return next('/')
+  else next()
+})
+
 app.use(router)
 
 components.forEach((component) => {

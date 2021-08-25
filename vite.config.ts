@@ -6,6 +6,7 @@ import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
 import ViteComponents from 'vite-plugin-components'
 import WindiCSS from 'vite-plugin-windicss'
 import AutoImport from 'unplugin-auto-import/vite'
+import Layouts from 'vite-plugin-vue-layouts'
 
 export default defineConfig({
   resolve: {
@@ -15,11 +16,22 @@ export default defineConfig({
   },
   plugins: [
     Vue(),
+    Pages(
+      {
+        extendRoute(route) {
+          if (route.path === '/') {
+          // Index is unauthenticated.
+            return route
+          }
 
-    // https://github.com/hannoeru/vite-plugin-pages
-    Pages(),
-
-    // https://github.com/antfu/unplugin-auto-import
+          return {
+            ...route,
+            meta: { ...route.meta, auth: true },
+          }
+        },
+      },
+    ),
+    Layouts(),
     AutoImport({
       imports: [
         'vue',
@@ -28,7 +40,6 @@ export default defineConfig({
       ],
     }),
 
-    // https://github.com/antfu/vite-plugin-components
     ViteComponents({
       // generate `components.d.ts` for ts support with Volar
       globalComponentsDeclaration: true,
